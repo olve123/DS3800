@@ -21,22 +21,20 @@
     }
 
     $statement= <<<SQL
-SELECT * FROM drikke;
+SELECT * FROM drinks;
 
 
 SQL;
+    $query =$db-> query($statement);
     $names = $db->query($statement);
     $prices = $db->query($statement);
-    foreach($names->FetchAll() as $name){
-        echo '<div id = "drink">';
-        echo $name['drinkName']  . '</br>';
-        echo "</div>";
-    }
 
-    foreach($prices->FetchAll() as $price){
-        //echo '<div id = "price">';
-        echo $price['Price']  . '</br>';
-       // echo "</div>";
+    while($r = $query->fetch(PDO::FETCH_OBJ)){
+        echo '<div class = "drink">';
+        echo $r ->drinkName . " ";
+        echo "Pris : ";
+        echo $r->price . "<br>";
+        echo "</div>";
     }
 
 
